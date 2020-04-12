@@ -23,11 +23,34 @@ p = zeros(size(X, 1), 1);
 
 
 
+% INPUT LAYER CALCULATIONS:
+% First add column of 1s to X, as per instructions:
+% "The matrix X contains the examples in rows. When you complete the code
+% in predict.m, you will need to add the column of 1's to the matrix. T"
+a1 = [ones(m, 1), X];
 
+% Following the provided formulas
 
+% HIDDEN LAYER CALCULATIONS:
+% Note that a1 is just our data input
+% INFO: Not sure why transposing of Theta1 is necessary here, but it's the
+% only permutation that worked for me ¯\_(?)_/¯
+z2 = a1 * Theta1';
+% Pass through sigmoid to get weights
+a2 = sigmoid(z2);
 
+% OUTPUT LAYER CALCULATIONS
+% Still following provided formulas
+% Again, add a row of 1s per instructions
+% INFO: I only noticed that it's needed by comparing size(a2) and
+% size(Theta2)
+a2 = [ones(m, 1), a2];
+z3 = a2 * Theta2';
+a3 = sigmoid(z3);
 
-
+% Using the function provided in the HINT to get the biggest index for each
+% row:
+[~, p] = max(a3, [], 2);
 
 % =========================================================================
 

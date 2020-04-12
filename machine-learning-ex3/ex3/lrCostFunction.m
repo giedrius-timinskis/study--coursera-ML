@@ -28,7 +28,7 @@ grad = zeros(size(theta));
 %       the cost function and gradient computations. 
 %
 % Hint: When computing the gradient of the regularized cost function, 
-%       there're many possible vectorized solutions, but one solution
+%       there are many possible vectorized solutions, but one solution
 %       looks like:
 %           grad = (unregularized gradient for logistic regression)
 %           temp = theta; 
@@ -38,9 +38,17 @@ grad = zeros(size(theta));
 
 
 
+% All of this I copied over from Exercise 2 regularised cost function
+calculatedSigmoid = sigmoid(X*theta); % This calculates h0(x(i))
 
+costFn = -y .* log(calculatedSigmoid) - (1 - y) .* log(1 - calculatedSigmoid);
+regularisedCostFnAddition = lambda/(2*m) * sum(theta(2:end) .^ 2); % Dont regularise the first one, as per formula
+J = 1/m * sum(costFn) + regularisedCostFnAddition;
 
-
+gradientFn = 1/m * sum((calculatedSigmoid - y) .* X);
+regularisedGradientFnAddition = lambda/m * theta';
+grad = gradientFn + regularisedGradientFnAddition;
+grad(1) = gradientFn(1); % Dont regularise the first one, as per formula
 
 
 
