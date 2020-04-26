@@ -20,16 +20,19 @@ grad = zeros(size(theta));
 %
 
 
+% I copied this from Week 1/2 Implementations
+predictions = X*theta;
+sqrErrors = (predictions - y).^2;
+nonRegularisedJ = 1/(2*m) * sum(sqrErrors);
+regularisationTerm = lambda/(2*m) * sum(theta(2:end) .^ 2); % Dont regularise the first one, as per formula
+J = nonRegularisedJ + regularisationTerm;
 
 
-
-
-
-
-
-
-
-
+%%% Also copied from Week 2 *BigBrain* %%%
+gradientFn = 1/m * sum((predictions - y) .* X);
+regularisedGradientFnAddition = lambda/m * theta';
+grad = gradientFn + regularisedGradientFnAddition;
+grad(1) = gradientFn(1); % Dont regularise the first one, as per formula
 % =========================================================================
 
 grad = grad(:);

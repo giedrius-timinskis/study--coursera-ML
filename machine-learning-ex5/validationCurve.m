@@ -39,14 +39,15 @@ error_val = zeros(length(lambda_vec), 1);
 %
 %
 
+% Literally the same thing as in validationCurve.m, just with different
+% lambda values and without the training set
+for i = 1:length(lambda_vec)
+    lambda = lambda_vec(i);
 
-
-
-
-
-
-
-
+    theta = trainLinearReg(X, y, lambda);
+    error_train(i) = linearRegCostFunction(X, y, theta, 0);
+    error_val(i) = linearRegCostFunction(Xval, yval, theta, 0);
+end
 
 % =========================================================================
 
