@@ -97,14 +97,17 @@ while ~isempty(email_contents)
     %       str2). It will return 1 only if the two strings are equivalent.
     %
 
-
-
-
-
-
-
-
-
+    
+ 
+    % There's probably a matlab function for finding a string in a hashmap
+    % but I was too lazy to read the docs so I'm doing it the old fashioned
+    % way
+    for i = 1 : length(vocabList)
+        currentWord = vocabList{i};
+        if (strcmp(currentWord, str))
+            word_indices = [word_indices ; i];
+        end
+    end
 
     % =============================================================
 

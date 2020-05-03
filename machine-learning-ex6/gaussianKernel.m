@@ -16,10 +16,8 @@ sim = 0;
 %
 %
 
-
-
-
-
+% Basically copy/paste of the provided formula in 1.2.1
+sim = exp(-(sum((x1 - x2).^2) / (2*sigma^2)));
 
 % =============================================================
     

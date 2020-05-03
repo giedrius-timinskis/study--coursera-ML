@@ -48,12 +48,11 @@ x = zeros(n, 1);
 %
 %
 
-
-
-
-
-
-
+% Not much to explain here
+% Just flip the index in x to 1 for every word_indices entry
+for i = 1:length(word_indices)
+    x(word_indices(i)) = 1;
+end
 
 % =========================================================================
     
