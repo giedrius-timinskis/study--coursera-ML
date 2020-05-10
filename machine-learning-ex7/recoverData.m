@@ -22,6 +22,15 @@ X_rec = zeros(size(Z, 1), size(U, 1));
 %               
 
 
+% For the last time, using the provided example 
+% Who needs a brain amirite
+for i = 1:length(Z)
+    v = Z(i, :)';
+    
+    for j = 1:length(U)
+        X_rec(i, j) = v' * U(j, 1:K)';
+    end
+end
 
 % =============================================================
 

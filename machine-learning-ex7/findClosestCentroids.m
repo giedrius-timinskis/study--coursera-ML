@@ -22,10 +22,24 @@ idx = zeros(size(X,1), 1);
 %
 
 
-
-
-
-
+% For every training example, we need to find how close it is to a given
+% centroid
+for currTrainingExampleI = 1:length(X)
+    
+    % We will apply a calculation for every centroid to calculate the
+    % distance between the training example and the deltoid coordinates
+    distancesToCentroids = zeros(K, size(X, 2));
+    for currCentroidI = 1:K
+        distance = (X(currTrainingExampleI, :) - centroids(currCentroidI, :)) .^ 2;
+        distancesToCentroids(currCentroidI, :) = distance;
+    end
+    
+    % Once we have the distances between the coordinates calculated, find
+    % the index of the centroid that is closest to the training example
+    [~, closestCentroidIndex] = min(sum(distancesToCentroids, 2));
+    
+    idx(currTrainingExampleI) = closestCentroidIndex;
+end
 
 % =============================================================
 

@@ -18,9 +18,14 @@ Z = zeros(size(X, 1), K);
 %                    projection_k = x' * U(:, k);
 %
 
-
-
-
+% Again, just using the provided example
+for i = 1:size(X, 1)
+    x = X(i, :)';
+    
+    for k = 1:K
+        Z(i, k) = x' * U(:, k);
+    end
+end
 % =============================================================
 
 end

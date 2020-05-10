@@ -28,9 +28,14 @@ centroids = zeros(K, n);
 
 
 
-
-
-
+% We want to re-adjust every centroid, so iterate through all of them
+for currCentroidI = 1:K
+    % First find the values of training examples assigned to this centroid
+    indicesOfTrExamplesAssignedToThisCentroid = find(idx == currCentroidI);
+    valuesOfTrExamplesAssignedToThisCentroid = X(indicesOfTrExamplesAssignedToThisCentroid, :);
+    % Then recompute the coordinates of the current centroid
+    centroids(currCentroidI, :) = 1/size(valuesOfTrExamplesAssignedToThisCentroid, 1) * sum(valuesOfTrExamplesAssignedToThisCentroid);
+end
 
 
 % =============================================================
