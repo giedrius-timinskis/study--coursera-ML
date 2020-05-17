@@ -22,12 +22,10 @@ sigma2 = zeros(n, 1);
 %
 
 
-
-
-
-
-
-
+% Following the given formula
+% Doing vectorized implementation because I'm lazy
+mu = 1/m * sum(X);
+sigma2 = 1/m * sum((X - mu(1, :)).^ 2);
 
 
 % =============================================================

@@ -24,14 +24,27 @@ for epsilon = min(pval):stepsize:max(pval)
     %       of 0's and 1's of the outlier predictions
 
 
+% For most of these I read the instructions in this file + ex8.mlx
+% As per directions, first get the predictions, comparing the prediction
+% values with the current episol
+predictions = pval < epsilon;
 
+% Following formula
+% True positive - how many we correctly predicted to be an anomaly
+tp = sum((predictions == 1) & (yval == 1));
+% False positive - how many we incorrectly attributed to be an anomaly
+fp = sum((predictions == 1) & (yval == 0));
+% False negative - how many we missed for being an anomaly
+fn = sum((predictions == 0) & (yval == 1));
 
+% Still following formula
+prec = tp/(tp + fp);
+rec = tp/(tp + fn);
 
+% Finally, calculating the F1 - an indicator of how well we are doing in
+% predicting anomalies with our current arguments
 
-
-
-
-
+F1 = 2*prec*rec / (prec + rec);
 
 
 

@@ -40,20 +40,34 @@ Theta_grad = zeros(size(Theta));
 %                     partial derivatives w.r.t. to each element of Theta
 %
 
+% Cost function without regularization.
+% Note that I am following the formula and a tip given in implementation
+%   note of 2.2.1.
+% I also had to switch positions of Theta' * X to deviate from the given
+%   formula, because it was throwing an error the other way around.
+% I am not sure why I had to sum the results of the cost function, but it
+%   works ¯\_(?)_/¯
+M = (X * Theta' - Y) .^ 2;
+J = sum(1/2 * sum(R .* M));
+
+% Gradients - without regularization
+% Note for the reader: don't be stupid like me and reuse M from the cost
+%   function, because this one is NON squared :|
+gradientM = (R .* (X * Theta' - Y));
+X_grad =  gradientM * Theta;
+% No idea why I had to transpose here, but that's the only way I could get
+%   the 'Matrix dimensions must agree.'
+Theta_grad = gradientM' * X;
 
 
+% Cost function - Regularised
+% Just following the formula, this one is pretty easy
+J = J + (lambda/2 * sum(sum(Theta .^ 2))) + (lambda/2 * sum(sum(X .^ 2)));
 
-
-
-
-
-
-
-
-
-
-
-
+% Gradients - regularised
+% Again, just following the formula, nothing fancy here
+X_grad = X_grad + lambda * X;
+Theta_grad = Theta_grad + lambda * Theta;
 
 % =============================================================
 
